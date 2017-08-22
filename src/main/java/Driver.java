@@ -66,13 +66,15 @@ public class Driver {
           2. use this "addArchiveToClassPath" method to define the dependency path on hdfs
          */
         job2.addArchiveToClassPath(new Path("/mysql/mysql-connector-java-5.1.39-bin.jar"));
-
-        job2.setMapperClass(autoCompleteModel.AcmMapper.class);
-        job2.setReducerClass(autoCompleteModel.AcmReducer.class);
-
+        
+        job2.setMapOutputKeyClass(Text.class);
+        job2.setMapOutputValueClass(Text.class);        
         job2.setOutputKeyClass(DBOutputWritable.class);
         job2.setOutputValueClass(NullWritable.class);
-
+        
+        job2.setMapperClass(autoCompleteModel.AcmMapper.class);
+        job2.setReducerClass(autoCompleteModel.AcmReducer.class);
+        
         job2.setInputFormatClass(TextInputFormat.class);
         job2.setOutputFormatClass(DBOutputFormat.class);
 
